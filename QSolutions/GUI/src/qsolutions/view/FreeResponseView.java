@@ -1,0 +1,296 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package qsolutions.view;
+
+import java.awt.KeyboardFocusManager;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.io.File;
+import javax.swing.JOptionPane;
+import javax.swing.text.html.HTMLEditorKit;
+import org.openide.util.Lookup;
+import qsolutions.api.DocumentItemApi;
+import qsolutions.api.FreeResponseApi;
+
+/** Panel for adding and editing FreeResponses to the exam
+ *
+ * @author Chris
+ */
+public class FreeResponseView extends QuestionView implements FocusListener
+{
+    /**
+     * Creates new form FreeResponseView
+     */
+    public FreeResponseView()
+    {
+        super();
+        item = Lookup.getDefault().lookup(FreeResponseApi.class).newItem();
+        setEditView(false);
+        initComponents();
+        answer.addKeyListener(this);
+        answer.setEditorKit(new HTMLEditorKit());
+        answer.setTransferHandler(new JTextPaneTransferHandler());
+        answer.setFocusTraversalKeys(
+                KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, null);
+        answer.addFocusListener(this);
+        addDocumentItem.addFocusListener(this);
+        fillFields();
+    }
+    
+    /**
+     * Initializes the long answer view
+     * @param nItem item to be defaulted to
+     */
+    public FreeResponseView(FreeResponseApi nItem) 
+    {
+        super();
+        item = nItem;
+        setEditView(true);
+        initComponents();
+        addDocumentItem.setText("Update Question");
+        answer.addKeyListener(this);
+        answer.setEditorKit(new HTMLEditorKit());
+        answer.setTransferHandler(new JTextPaneTransferHandler());
+        answer.setFocusTraversalKeys(
+                KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, null);
+        answer.addFocusListener(this);
+        addDocumentItem.addFocusListener(this);
+        fillFields();
+    }
+    
+    /**
+     * Fills the gui from inItem, sets isEditView to true
+     * @param inItem the item to load information from
+     */
+    protected void fillFields( DocumentItemApi inItem )
+    {
+        FreeResponseApi lQuestion = ( FreeResponseApi ) inItem;
+        questionHeaderPanel.fillFields( lQuestion );
+        extraLineNum.setValue( lQuestion.getExtraLines() );
+        answer.setText( lQuestion.getAnswer() );
+        examNavigatorPanel.refreshView(isEditView());
+    }
+    
+    /**
+     * Returns a FreeResponse constructed from the fields in the gui
+     * @return FreeResponse constructed from the gui fields
+     */
+    protected FreeResponseApi extractItem()
+    {
+        FreeResponseApi toAdd = Lookup.getDefault().lookup(
+                FreeResponseApi.class).newItem();
+        questionHeaderPanel.extractQuestion( toAdd );
+        //toAdd.picture;
+        toAdd.setAnswer( answer.getText() );
+        // if the extraLineNum is an Integer, set extra lines to that Integer
+        if ( extraLineNum.getValue() instanceof Integer )
+        {
+            toAdd.setExtraLines( ( ( Integer ) extraLineNum.getValue() ).intValue() );
+        }
+        // otherwise assert invalid entry and default lines to 0
+        else
+        {
+            assert( true ) : kBundle.getString("INVALID EXTRA NUMBER OF LINES");
+            toAdd.setExtraLines( 0 );
+        }
+        imageChanged = questionHeaderPanel.imageChanged;
+        // If the vied is an edit view and the image is unchanged
+        if ( isEditView() && !imageChanged )
+        {
+            toAdd.setShallowImage(item);
+        }
+        return toAdd;
+    }
+    
+    /**
+     * Stores item appropriately in exam
+     */
+    public void addItem()
+    {
+        super.addItem();
+        
+        /* The rest of this code clears out the question panel and allows the 
+         * user to make a new Long answer question
+         */
+        setEditView(false);
+        item = Lookup.getDefault().lookup(FreeResponseApi.class).newItem();
+        fillFields();
+     
+        addDocumentItem.setText( kBundle.getString("ADD QUESTION") );
+    }
+    
+    /**
+     * Return the attached image file being displayed in the view
+     * @return the image file being displayed in the view
+     */
+    @Override
+    public File getImageFile()
+    {
+        return questionHeaderPanel.getStoredImage();
+    }
+    
+    /**
+     * Triggers clicking the bold WYSYWIG button
+     */
+    @Override
+    public void boldAction()
+    {
+        questionHeaderPanel.boldAction();
+    }
+    
+    /**
+     * Triggers clicking the italic WYSYWIG button
+     */
+    @Override
+    public void italicAction()
+    {
+        questionHeaderPanel.italicAction();
+    }
+    /**
+     * Triggers clicking the underline WYSYWIG button
+     */
+    @Override
+    public void underlineAction()
+    {
+        questionHeaderPanel.underlineAction();
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    // GEN-BEGIN
+    @SuppressWarnings( "unchecked" )
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        addDocumentItem = new javax.swing.JButton();
+        extraLineNum = new javax.swing.JSpinner();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        questionHeaderPanel = new qsolutions.view.QuestionHeaderPanel();
+        examNavigatorPanel = new ExamNavigatorPanel(this);
+        scrollPane = new javax.swing.JScrollPane();
+        answer = new javax.swing.JTextPane();
+
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("qsolutions/view/Bundle"); // NOI18N
+        addDocumentItem.setText(bundle.getString("ADD QUESTION")); // NOI18N
+        addDocumentItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addDocumentItemActionPerformed(evt);
+            }
+        });
+
+        extraLineNum.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+        extraLineNum.setFocusable(false);
+
+        jLabel2.setText(bundle.getString("ANSWER:")); // NOI18N
+
+        jLabel6.setText(bundle.getString("EXTRA LINES:")); // NOI18N
+
+        scrollPane.setViewportView(answer);
+
+        org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(questionHeaderPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .add(layout.createSequentialGroup()
+                .add(examNavigatorPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(0, 0, Short.MAX_VALUE))
+            .add(layout.createSequentialGroup()
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                        .add(0, 0, Short.MAX_VALUE)
+                        .add(addDocumentItem))
+                    .add(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(layout.createSequentialGroup()
+                                .add(jLabel2)
+                                .add(343, 343, 343)
+                                .add(jLabel6)
+                                .add(18, 18, 18)
+                                .add(extraLineNum, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 51, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                            .add(scrollPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 535, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .add(0, 18, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                .add(examNavigatorPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(questionHeaderPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel2)
+                    .add(jLabel6)
+                    .add(extraLineNum, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(scrollPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 77, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(1, 1, 1)
+                .add(addDocumentItem)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+    }// </editor-fold>//GEN-END:initComponents
+    // GEN-END
+
+    /**
+     * Add the item to the exam
+     * @param evt unused
+     */
+    private void addDocumentItemActionPerformed( java.awt.event.ActionEvent evt )//GEN-FIRST:event_addDocumentItemActionPerformed
+    {//GEN-HEADEREND:event_addDocumentItemActionPerformed
+        addItem();
+    }//GEN-LAST:event_addDocumentItemActionPerformed
+
+   /**
+    * Called if some component gains keyboard focus (whether it be from 
+    * keyboard tabbing or mouse click on the component)
+    * @param ev the event generated from the focus gain, include the component
+    * that got focused
+    */
+    @Override
+    public void focusGained(FocusEvent ev)
+    {
+        System.out.println("Moo");
+
+    }
+    
+   /**
+    * Called if some component loses keyboard focus (whether it be from 
+    * keyboard tabbing or mouse click off the component)
+    * @param ev the event generated from the focus los, includes the component
+    * that got focused
+    */
+    @Override
+    public void focusLost(FocusEvent ev) 
+    {
+        
+    }
+    
+        /**
+     * Gets the question header panel
+     * @return the question header panel
+     */
+    protected QuestionHeaderPanel getHeaderPanel()
+    {
+        return questionHeaderPanel;
+    }
+    
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addDocumentItem;
+    private javax.swing.JTextPane answer;
+    private qsolutions.view.ExamNavigatorPanel examNavigatorPanel;
+    private javax.swing.JSpinner extraLineNum;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel6;
+    private qsolutions.view.QuestionHeaderPanel questionHeaderPanel;
+    private javax.swing.JScrollPane scrollPane;
+    // End of variables declaration//GEN-END:variables
+}

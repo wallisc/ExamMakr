@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+OpenIDE-Module: qsolutions.lib.corerenderer
+OpenIDE-Module-Localizing-Bundle: qsolutions/lib/corerenderer/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

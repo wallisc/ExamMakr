@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- You may freely edit this file. See harness/README in the NetBeans platform -->
+<!-- for some information on what you could do (e.g. targets to override). -->
+<!-- If you delete this file and reopen the project it will be recreated. -->
+<project name="EvenMoreQuestionableImprovements" basedir=".">
+    <description>Builds the module suite EvenMoreQuestionableImprovements.</description>
+    <import file="nbproject/build-impl.xml"/>
+    <target description="Run checkstyle on src directory." name="checkstyle">
+       <taskdef resource="checkstyletask.properties"
+          classpath="lib/308checks.jar;lib/checkstyle-all-4.4.jar"/>
+       <checkstyle config="lib/308style.xml">
+          <!-- Don't check IDE generated gui classes -->
+          <fileset dir="Exam/src/qsolutions" includes="*/*.java" excludes=""/>
+          <fileset dir="GUI/src/qsolutions" includes="*/*.java" excludes=""/>
+          <fileset dir="QSolutionsAPI/src/qsolutions" includes="*/*.java" excludes=""/>
+          <fileset dir="Utilities/src/qsolution" includes="*/*.java" excludes=""/>
+       </checkstyle>
+    </target>
+        <!--
+                 =================
+                 LOC counter
+                 =================
+      -->
+     <target description="Count Lines of Code in src directory." name="loc">
+         <java classname="textui.LOC">
+             <arg line="-r -d Exam/src/qsolutions/exam"/>
+             <classpath>
+                 <pathelement path="lib/LOC.jar"/>
+             </classpath>
+         </java>
+         <java classname="textui.LOC">
+             <arg line="-r -d GUI/src/qsolutions/"/>
+             <classpath>
+                 <pathelement path="lib/LOC.jar"/>
+             </classpath>
+         </java>
+         <java classname="textui.LOC">
+             <arg line="-r -d QSolutionsAPI/src/qsolutions"/>
+             <classpath>
+                 <pathelement path="lib/LOC.jar"/>
+             </classpath>
+         </java>   
+         <java classname="textui.LOC">
+             <arg line="-r -d Utilities/src/qsolution"/>
+             <classpath>
+                 <pathelement path="lib/LOC.jar"/>
+             </classpath>
+         </java>
+     </target>
+</project>

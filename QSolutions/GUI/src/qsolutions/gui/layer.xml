@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN" "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
+<filesystem>
+    <folder name="Actions">
+        <file name="Edit_hidden"/>
+        <folder name="Window">
+            <file name="qsolutions-gui-NomsTopComponent.instance_hidden"/>
+            <file name="qsolutions-gui-PropertiesTopComponent"/>
+        </folder>
+    </folder>
+    <folder name="Menu">
+        <folder name="MyFile">
+            <attr name="displayName" bundlevalue="qsolutions.gui.Bundle#Menu/File"/>
+            <attr name="position" intvalue="0"/>
+            <folder name="Import">
+                <attr name="position" intvalue="1998"/>
+                <attr name="displayName" bundlevalue="qsolutions.gui.Bundle#IMPORT"/>
+            </folder>
+            <folder name="Export">
+                <attr name="position" intvalue="1999"/>
+                <attr name="displayName" bundlevalue="qsolutions.gui.Bundle#EXPORT"/>
+            </folder>
+            <file name="org-openide-actions-SaveAllAction.shadow_hidden"/>
+            <file name="org-netbeans-modules-print-action-PageSetupAction.shadow_hidden"/>
+            <file name="org-netbeans-modules-print-action-PrintAction.shadow_hidden"/>
+            <file name="org-openide-actions-SaveAsAction.shadow_hidden"/>
+            <file name="org-openide-actions-SaveAction.shadow_hidden"/>
+        </folder>
+        <folder name="MyEdit">
+            <attr name="displayName" bundlevalue="qsolutions.gui.Bundle#EDIT"/>
+            <attr name="position" intvalue="1"/>
+            <file name="org-openide-actions-CutAction.instance">
+                <attr name="instanceCreate" methodvalue="org.openide.awt.Actions.callback"/>
+                <attr name="key" stringvalue="cut-to-clipboard"/>
+                <attr name="iconBase" stringvalue="org/openide/resources/actions/cut.gif"/>
+                <attr name="displayName" bundlevalue="qsolutions.gui.Bundle#CUT"/>
+                <attr name="position" intvalue="2"/>
+            </file>
+            <file name="org-openide-actions-CopyAction.instance">
+                <attr name="instanceCreate" methodvalue="org.openide.awt.Actions.callback"/>
+                <attr name="key" stringvalue="copy-to-clipboard"/>
+                <attr name="iconBase" stringvalue="org/openide/resources/actions/copy.gif"/>
+                <attr name="displayName" bundlevalue="qsolutions.gui.Bundle#COPY"/>
+                <attr name="position" intvalue="3"/>
+            </file>
+            <file name="org-openide-actions-PasteAction.instance">
+                <attr name="position" intvalue="4"/>
+                <attr name="displayName" bundlevalue="qsolutions.gui.Bundle#PASTE"/>
+            </file>
+        </folder>
+        <folder name="Exam">
+            <attr name="displayName" bundlevalue="qsolutions.gui.Bundle#Menu/Exam"/>
+            <attr name="position" intvalue="5"/>
+        </folder>
+        <folder name="MyWindow">
+            <attr name="displayName" bundlevalue="qsolutions.gui.Bundle#Menu/Window"/>
+            <file name="org-netbeans-core-windows-actions-GlobalPropertiesAction.shadow_hidden"/>
+            <attr name="position" intvalue="6"/>
+        </folder>
+        <folder name="MyHelp">
+            <attr name="displayName" bundlevalue="qsolutions.gui.Bundle#Menu/Help"/>
+            <file name="org-netbeans-core-actions-AboutAction.hidden"/>
+            <attr name="position" intvalue="7"/>
+        </folder>
+        <file name="View_hidden"/>
+        <file name="Tools_hidden"/>
+        <file name="GoTo_hidden"/>
+        <file name="Edit_hidden"/>
+        <file name="Help_hidden"/>
+        <file name="File_hidden"/>
+        <file name="Window_hidden"/>
+    </folder>
+    <folder name="Toolbars">
+        <file name="UndoRedo_hidden"/>
+        <file name="Clipboard_hidden"/>
+        <folder name="File">
+            <file name="org-openide-actions-SaveAllAction.shadow_hidden"/>
+        </folder>
+    </folder>
+    <folder name="QuickSearch_hidden"/>
+</filesystem>

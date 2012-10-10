@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+OpenIDE-Module: qsolution.utilities
+OpenIDE-Module-Localizing-Bundle: qsolution/utilities/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

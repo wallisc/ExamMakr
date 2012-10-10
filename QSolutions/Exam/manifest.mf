@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+OpenIDE-Module: qsolutions.exam
+OpenIDE-Module-Localizing-Bundle: qsolutions/exam/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

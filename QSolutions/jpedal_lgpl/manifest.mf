@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+OpenIDE-Module: qsolutions.lib.jpedal_lgpl
+OpenIDE-Module-Localizing-Bundle: qsolutions/lib/jpedal_lgpl/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+
